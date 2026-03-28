@@ -11,13 +11,7 @@ const nextConfig = {
         },
       ],
     },
-    webpack: (config) => {
-      config.module.rules.push({
-        test: /\/sanity\//,
-        loader: 'ignore-loader',
-      });
-      return config;
-    },
+
   }
   
   module.exports = nextConfig
