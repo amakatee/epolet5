@@ -1,6 +1,7 @@
 // app/layout.jsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { StateContext } from '../context/StateContext'; // Add this import
 import './globals.css';
 
 export const metadata = {
@@ -31,10 +32,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className="min-h-screen flex flex-col bg-black">
-        <Navbar />
-        <main className="flex-grow pt-[8vh]">{children}</main>
-        <Footer />
+      <body className="flex flex-col min-h-screen bg-black">
+        <StateContext> {/* Wrap with StateContext */}
+          <Navbar />
+          <main className="flex-grow pt-[8vh]">{children}</main>
+          <Footer />
+        </StateContext>
       </body>
     </html>
   );

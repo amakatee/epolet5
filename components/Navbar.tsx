@@ -22,7 +22,7 @@ const CONTACT_INFO = {
 };
 
 const NAVIGATION_ITEMS = [
-  { name: 'Каталог', path: '/katalog' },
+  { name: 'Каталог', path: '/catalog' },
   { name: 'О Компании', path: '/about' },
   { name: 'Контакты', path: '/contact' },
 ];
@@ -112,45 +112,43 @@ const Navbar: React.FC<NavbarProps> = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="hidden lg:flex justify-between items-center px-6 xl:px-20 py-2 border-b border-white/10 text-xs font-light tracking-wide bg-black/50"
+            className="items-center justify-between hidden px-6 py-2 text-xs font-light tracking-wide border-b lg:flex xl:px-20 border-white/10 bg-black/50"
           >
             <div className="flex items-center gap-4 xl:gap-6">
               <a
                 href={`tel:${CONTACT_INFO.phoneLink}`}
-                className="flex items-center gap-2 hover:text-yellow-main transition-colors group"
+                className="flex items-center gap-2 transition-colors hover:text-yellow-main group"
                 aria-label="Позвонить нам"
               >
-                <PhoneIcon className="w-4 h-4 text-yellow-main group-hover:scale-110 transition-transform" />
+                <PhoneIcon className="w-4 h-4 transition-transform text-yellow-main group-hover:scale-110" />
                 <span>{CONTACT_INFO.phone}</span>
               </a>
               <div className="flex items-center gap-2 group">
-                <MapPinIcon className="w-4 h-4 text-yellow-main flex-shrink-0" />
+                <MapPinIcon className="flex-shrink-0 w-4 h-4 text-yellow-main" />
                 <span className="hidden xl:inline">{CONTACT_INFO.address}</span>
-                <span className="xl:hidden text-xs">{CONTACT_INFO.addressShort}</span>
+                <span className="text-xs xl:hidden">{CONTACT_INFO.addressShort}</span>
               </div>
               <a
                 href={`mailto:${CONTACT_INFO.email}`}
-                className="flex items-center gap-2 hover:text-yellow-main transition-colors group"
+                className="flex items-center gap-2 transition-colors hover:text-yellow-main group"
                 aria-label="Отправить email"
               >
-                <EnvelopeIcon className="w-4 h-4 text-yellow-main group-hover:scale-110 transition-transform" />
+                <EnvelopeIcon className="w-4 h-4 transition-transform text-yellow-main group-hover:scale-110" />
                 <span className="hidden sm:inline">{CONTACT_INFO.email}</span>
               </a>
             </div>
             
-            <div className="flex items-center gap-3">
-              <span className="text-white/50 text-xs">Работаем 24/7</span>
-            </div>
+           
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Navigation */}
-      <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 h-16 lg:h-20">
+      <div className="flex items-center justify-between h-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 lg:h-20">
         {/* Logo */}
         <motion.div
           onClick={() => handleNavigation('/')}
-          className="flex items-center gap-2 sm:gap-3 cursor-pointer group"
+          className="flex items-center gap-2 cursor-pointer sm:gap-3 group"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           aria-label="На главную"
@@ -159,20 +157,20 @@ const Navbar: React.FC<NavbarProps> = () => {
           onKeyPress={(e) => e.key === 'Enter' && handleNavigation('/')}
         >
           <motion.img
-            className="w-8 sm:w-10 lg:w-12 transition-all duration-300 group-hover:scale-110"
+            className="w-8 transition-all duration-300 sm:w-10 lg:w-12 group-hover:scale-110"
             src="/ep.png"
             alt="Эполет логотип"
             whileHover={{ rotate: 5 }}
           />
           <div>
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-light tracking-wide uppercase leading-tight">
+            <h3 className="text-lg font-light leading-tight tracking-wide uppercase sm:text-xl lg:text-2xl">
               Эполет
             </h3>
           </div>
         </motion.div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
+        <div className="items-center hidden gap-4 md:flex lg:gap-6 xl:gap-8">
           {NAVIGATION_ITEMS.map((item) => (
             <motion.button
               key={item.path}
@@ -198,10 +196,10 @@ const Navbar: React.FC<NavbarProps> = () => {
         </div>
 
         {/* Quick Contact - Tablet */}
-        <div className="hidden sm:flex md:hidden items-center gap-3">
+        <div className="items-center hidden gap-3 sm:flex md:hidden">
           <a
             href={`tel:${CONTACT_INFO.phoneLink}`}
-            className="flex items-center gap-1 text-xs hover:text-yellow-main transition-colors"
+            className="flex items-center gap-1 text-xs transition-colors hover:text-yellow-main"
             aria-label="Позвонить"
           >
             <PhoneIcon className="w-4 h-4 text-yellow-main" />
@@ -212,7 +210,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         {/* Mobile Menu Button */}
         <motion.button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
+          className="relative z-50 flex items-center justify-center w-10 h-10 transition-colors rounded-full md:hidden hover:bg-white/10"
           aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
           aria-expanded={isMenuOpen}
           whileTap={{ scale: 0.9 }}
@@ -229,13 +227,13 @@ const Navbar: React.FC<NavbarProps> = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/95 backdrop-blur-lg z-40 md:hidden"
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg md:hidden"
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
           >
-            <div className="flex flex-col h-full pt-20 pb-8 px-6">
+            <div className="flex flex-col h-full px-6 pt-20 pb-8">
               {/* Navigation Items */}
               <div className="flex-1">
                 {NAVIGATION_ITEMS.map((item, index) => (
@@ -262,16 +260,16 @@ const Navbar: React.FC<NavbarProps> = () => {
 
               {/* Mobile Contact Section */}
               <motion.div
-                className="pt-6 border-t border-white/20 space-y-4"
+                className="pt-6 space-y-4 border-t border-white/20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 <a
                   href={`tel:${CONTACT_INFO.phoneLink}`}
-                  className="flex items-center gap-3 py-2 hover:text-yellow-main transition-colors"
+                  className="flex items-center gap-3 py-2 transition-colors hover:text-yellow-main"
                 >
-                  <PhoneIcon className="text-yellow-main w-5 h-5" />
+                  <PhoneIcon className="w-5 h-5 text-yellow-main" />
                   <div>
                     <p className="text-xs text-white/60">Телефон</p>
                     <p className="text-sm font-medium">{CONTACT_INFO.phone}</p>
@@ -279,7 +277,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </a>
                 
                 <div className="flex items-start gap-3 py-2">
-                  <MapPinIcon className="text-yellow-main w-5 h-5 flex-shrink-0 mt-1" />
+                  <MapPinIcon className="flex-shrink-0 w-5 h-5 mt-1 text-yellow-main" />
                   <div>
                     <p className="text-xs text-white/60">Адрес</p>
                     <p className="text-sm">{CONTACT_INFO.address}</p>
@@ -288,9 +286,9 @@ const Navbar: React.FC<NavbarProps> = () => {
                 
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="flex items-center gap-3 py-2 hover:text-yellow-main transition-colors"
+                  className="flex items-center gap-3 py-2 transition-colors hover:text-yellow-main"
                 >
-                  <EnvelopeIcon className="text-yellow-main w-5 h-5" />
+                  <EnvelopeIcon className="w-5 h-5 text-yellow-main" />
                   <div>
                     <p className="text-xs text-white/60">Email</p>
                     <p className="text-sm">{CONTACT_INFO.email}</p>
